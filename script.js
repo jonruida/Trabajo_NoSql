@@ -1,62 +1,38 @@
-  console.log("El archivo script.js se ha cargado correctamente.");
-  // Import the functions you need from the SDKs you need
-// Import the functions you need from the SDKs you need
+console.log("El archivo script.js se ha cargado correctamente.");
+
+// Importación de las funciones necesarias de Firebase SDK
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js';
 import { getDatabase, ref, push, child, update } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
 
+// Configuración de Firebase
+const firebaseConfig = {
+  // Tu configuración de Firebase
+};
 
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+// Inicialización de Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDhOogls9sWiA4KAEf-REHkN1slpvgYBg4",
-    authDomain: "trabajo-final-nosql.firebaseapp.com",
-    databaseURL: "https://trabajo-final-nosql-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "trabajo-final-nosql",
-    storageBucket: "trabajo-final-nosql.appspot.com",
-    messagingSenderId: "1029951381100",
-    appId: "1:1029951381100:web:d3fe73fcf2cdeda6f94249",
-    measurementId: "G-F1EVQ7W0PT"
-  };
+// Inicialización de la referencia a la base de datos
+const db = getDatabase(app);
+const usersRef = ref(db, "Usuarios");
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  // Obtener una referencia a la base de datos
-  const db = getDatabase(app);
-  const usersRef = db.ref("Usuarios");
-
-// Agregar un evento "submit" al formulario
 document.getElementById("userForm").addEventListener("submit", (event) => {
   event.preventDefault(); // Prevenir que el formulario se envíe
 
-  // Obtener los valores del formulario
   const nombre = document.getElementById("nombre").value;
   const apellido = document.getElementById("apellido").value;
   const edad = document.getElementById("edad").value;
 
- // Generar una clave única para el nuevo usuario
-  const newUserId = usersRef.push().key;
-
-  // Construir la ruta de referencia al nuevo usuario
+  const newUserId = push(usersRef).key; // Generar clave única
   const newUserRef = child(usersRef, newUserId);
 
-  // Crear un objeto con los datos del nuevo usuario
-  const userData = {
-    Nombre: nombre,
-    Apellido: apellido,
-    Edad: edad
-  };
+  const userData = { Nombre: nombre, Apellido: apellido, Edad: edad };
+  update(newUserRef, userData); // Actualizar la base de datos
 
-  // Actualizar el nuevo usuario en la base de datos
-  update(newUserRef, userData);
-
-  // Limpiar el formulario después de enviar los datos
+  // Limpiar el formulario
   document.getElementById("nombre").value = "";
   document.getElementById("apellido").value = "";
-  document.getElementById("edad").value = "";
+  document.getElementById("edad").value = "";
 });
-
