@@ -27,7 +27,7 @@ import { getDatabase, ref, push, child, update } from 'https://www.gstatic.com/f
   const analytics = getAnalytics(app);
   // Obtener una referencia a la base de datos
   const db = getDatabase(app);
-  const usersRef = db.ref("Usuarios");
+  const usersRef = db.reference("Usuarios");
 
 // Agregar un evento "submit" al formulario
 document.getElementById("userForm").addEventListener("submit", (event) => {
