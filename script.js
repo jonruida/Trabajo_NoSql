@@ -1,4 +1,5 @@
 <script type="module">
+  console.log("El archivo script.js se ha cargado correctamente.");
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
