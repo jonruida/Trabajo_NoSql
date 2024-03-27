@@ -25,8 +25,8 @@
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 
-// Obtener una referencia a la colección "Usuarios" en la base de datos
-const db = firebase.database();
+// Obtener una referencia a la base de datos
+const db = getDatabase();
 const usersRef = db.ref("Usuarios");
 
 // Agregar un evento "submit" al formulario
@@ -38,12 +38,21 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
   const apellido = document.getElementById("apellido").value;
   const edad = document.getElementById("edad").value;
 
-  // Enviar los datos a la base de datos
-  usersRef.push({
+ // Generar una clave única para el nuevo usuario
+  const newUserId = usersRef.push().key;
+
+  // Construir la ruta de referencia al nuevo usuario
+  const newUserRef = child(usersRef, newUserId);
+
+  // Crear un objeto con los datos del nuevo usuario
+  const userData = {
     Nombre: nombre,
     Apellido: apellido,
     Edad: edad
-  });
+  };
+
+  // Actualizar el nuevo usuario en la base de datos
+  update(newUserRef, userData);
 
   // Limpiar el formulario después de enviar los datos
   document.getElementById("nombre").value = "";
