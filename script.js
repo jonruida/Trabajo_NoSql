@@ -1,8 +1,9 @@
   console.log("El archivo script.js se ha cargado correctamente.");
   // Import the functions you need from the SDKs you need
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js';
+import { getDatabase, ref, push, child, update } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
 
 
   // TODO: Add SDKs for Firebase products that you want to use
