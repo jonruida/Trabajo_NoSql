@@ -25,10 +25,9 @@ import { getDatabase, ref, push, child, update } from 'https://www.gstatic.com/f
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
-
-// Obtener una referencia a la base de datos
-const db = getDatabase();
-const usersRef = db.ref("Usuarios");
+  // Obtener una referencia a la base de datos
+  const db = firebase.database();
+  const usersRef = db.ref("Usuarios");
 
 // Agregar un evento "submit" al formulario
 document.getElementById("userForm").addEventListener("submit", (event) => {
