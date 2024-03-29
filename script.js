@@ -36,18 +36,19 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
 
   // Obtener los valores del formulario
   const nombreElement = document.getElementById("nombre");
-  const apellidoElement = document.getElementById("apellido");
-  const edadElement = document.getElementById("edad");
+  const apellidoElement = document.getElementById("apellidos"); // Corregido el ID a "apellidos"
+  const generoElement = document.getElementById("genero");
+  const fechaNacimientoElement = document.getElementById("fechaNacimiento");
 
   // Verificar si los elementos existen
-  if (nombreElement && apellidoElement && edadElement) {
+  if (nombreElement && apellidoElement && generoElement && fechaNacimientoElement) { // Actualizado el nombre del elemento
     const nombre = nombreElement.value;
     const apellido = apellidoElement.value;
-    const edad = edadElement.value;
+    const genero = generoElement.value;
+    const fechaNacimiento = fechaNacimientoElement.value;
 
     // Resto del código para agregar el usuario a la base de datos
   } else {
     console.error("Uno o más elementos del formulario no existen");
   }
 });
-
