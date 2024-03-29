@@ -3,7 +3,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js';
-import { getDatabase, push, reference, child, update } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
+import { getDatabase, push, ref, child, update } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
 
 
   // TODO: Add SDKs for Firebase products that you want to use
@@ -27,7 +27,7 @@ import { getDatabase, push, reference, child, update } from 'https://www.gstatic
   const analytics = getAnalytics(app);
   // Obtener una referencia a la base de datos
   const db = getDatabase(app);
-  const usersRef = db.reference("Usuarios");
+  const usersRef = db.ref("Usuarios");
 
 // Agregar un evento "submit" al formulario
 document.getElementById("userForm").addEventListener("submit", (event) => {
