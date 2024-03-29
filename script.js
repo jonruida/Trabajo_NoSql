@@ -1,9 +1,9 @@
-  console.log("El archivo script.js se ha cargado correctamente.");
-  // Import the functions you need from the SDKs you need
-// Import the functions you need from the SDKs you need
+console.log("El archivo script.js se ha cargado correctamente.");
+
+// Importar las funciones necesarias del SDK de Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js';
-import { getDatabase, push, ref, child, update } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
+import { getDatabase, ref, push } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
 
 
   // TODO: Add SDKs for Firebase products that you want to use
@@ -22,12 +22,13 @@ import { getDatabase, push, ref, child, update } from 'https://www.gstatic.com/f
     measurementId: "G-F1EVQ7W0PT"
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  // Obtener una referencia a la base de datos
-  const db = getDatabase(app);
-  const usersRef = db.ref("Usuarios");
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getDatabase();
+
+// Referencia a la base de datos de usuarios
+const usersRef = ref(db, 'Usuarios');
 
 // Agregar un evento "submit" al formulario
 document.getElementById("userForm").addEventListener("submit", (event) => {
@@ -38,13 +39,10 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
   const apellido = document.getElementById("apellido").value;
   const edad = document.getElementById("edad").value;
 
- // Generar una clave única para el nuevo usuario
-  const newUserId = usersRef.push().key;
+  // Generar una clave única para el nuevo usuario
+  const newUserId = push(usersRef).key;
 
-  // Construir la ruta de referencia al nuevo usuario
-  const newUserRef = child(usersRef, newUserId);
-
-  // Crear un objeto con los datos del nuevo usuario
+  // Construir los datos del nuevo usuario
   const userData = {
     Nombre: nombre,
     Apellido: apellido,
@@ -52,11 +50,10 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
   };
 
   // Actualizar el nuevo usuario en la base de datos
-  update(newUserRef, userData);
+  set(ref(db, `Usuarios/${newUserId}`), userData);
 
   // Limpiar el formulario después de enviar los datos
   document.getElementById("nombre").value = "";
   document.getElementById("apellido").value = "";
   document.getElementById("edad").value = "";
 });
-
