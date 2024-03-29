@@ -30,35 +30,8 @@
 
     <div id="userList"></div>
 
-<!-- Carga la biblioteca de Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"></script>
-<!-- Carga la capa de compatibilidad -->
-<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
-<script type="module">
-  // Importa las funciones necesarias de la biblioteca de Firebase
-  import { initializeApp, getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-  import { getDatabase } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+<!-- Importa tu script.js -->
+<script type="module" src="script.js"></script>
 
-  // Tu configuración de Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyDhOogls9sWiA4KAEf-REHkN1slpvgYBg4",
-    authDomain: "trabajo-final-nosql.firebaseapp.com",
-    databaseURL: "https://trabajo-final-nosql-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "trabajo-final-nosql",
-    storageBucket: "trabajo-final-nosql.appspot.com",
-    messagingSenderId: "1029951381100",
-    appId: "1:1029951381100:web:d3fe73fcf2cdeda6f94249",
-    measurementId: "G-F1EVQ7W0PT"
-  };
-
-  // Inicializa Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getDatabase();
-</script>
 </body>
 </html>
