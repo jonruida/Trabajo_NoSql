@@ -35,25 +35,19 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
   event.preventDefault(); // Prevenir que el formulario se envíe
 
   // Obtener los valores del formulario
-  const nombre = document.getElementById("nombre").value;
-  const apellido = document.getElementById("apellido").value;
-  const edad = document.getElementById("edad").value;
+  const nombreElement = document.getElementById("nombre");
+  const apellidoElement = document.getElementById("apellido");
+  const edadElement = document.getElementById("edad");
 
-  // Generar una clave única para el nuevo usuario
-  const newUserId = push(usersRef).key;
+  // Verificar si los elementos existen
+  if (nombreElement && apellidoElement && edadElement) {
+    const nombre = nombreElement.value;
+    const apellido = apellidoElement.value;
+    const edad = edadElement.value;
 
-  // Construir los datos del nuevo usuario
-  const userData = {
-    Nombre: nombre,
-    Apellido: apellido,
-    Edad: edad
-  };
-
-  // Actualizar el nuevo usuario en la base de datos
-  set(ref(db, `Usuarios/${newUserId}`), userData);
-
-  // Limpiar el formulario después de enviar los datos
-  document.getElementById("nombre").value = "";
-  document.getElementById("apellido").value = "";
-  document.getElementById("edad").value = "";
+    // Resto del código para agregar el usuario a la base de datos
+  } else {
+    console.error("Uno o más elementos del formulario no existen");
+  }
 });
+
