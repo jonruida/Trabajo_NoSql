@@ -44,7 +44,7 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
     const apellido = apellidoElement.value;
 
     // Realizar la consulta a la base de datos
-    const queryRef = orderByChild(usersRef,"nombre"); // Ordenar por el campo 'nombre'
+    const queryRef = orderByChild("Usuarios","nombre"); // Ordenar por el campo 'nombre'
     const query = queryRef.equalTo(nombre); // Filtrar por nombre igual al nombre proporcionado
 
     // Realizar la consulta y manejar los resultados
