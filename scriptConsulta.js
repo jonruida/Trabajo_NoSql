@@ -28,7 +28,7 @@ const analytics = getAnalytics(app);
 const db = getDatabase();
 
 // Referencia a la base de datos de usuarios
-const usersRef = ref(db, 'Usuarios/Usuario 1');
+const usersRef = ref(db, 'Usuarios');
 
 // Agregar un evento "submit" al formulario
 document.getElementById("userForm").addEventListener("submit", (event) => {
@@ -43,17 +43,16 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
     const nombre = nombreElement.value;
     const apellido = apellidoElement.value;
 
-    // Realizar la consulta a la base de datos
-    const queryRef = orderByChild("Usuarios","nombre"); // Ordenar por el campo 'nombre'
-    const query = queryRef.equalTo(nombre); // Filtrar por nombre igual al nombre proporcionado
+    
 
     // Realizar la consulta y manejar los resultados
-    get(query)
+    get(usersRef)
       .then((snapshot) => {
         snapshot.forEach((childSnapshot) => {
           const userData = childSnapshot.val();
-          // Aquí puedes hacer algo con los datos del usuario, por ejemplo, mostrarlos en la consola
+          if(userData.child("Nombre").value==nombreElement){
           console.log(userData);
+		  }
         });
       })
       .catch((error) => {
