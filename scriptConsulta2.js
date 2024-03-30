@@ -39,34 +39,25 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
     const apellido = apellidoElement.value;
 
     // Realizar la consulta a la base de datos
-    const queryRef = query(usersRef, orderByChild("Nombre"), equalTo(nombre));
-    const queryRef2 = query(usersRef, orderByChild("Apellidos"), equalTo(apellido));
+    const queryRef = query(usersRef);
+    
 
     // Realizar la consulta y manejar los resultados
     get(queryRef)
       .then((snapshot) => {
         snapshot.forEach((childSnapshot) => {
           const userData = childSnapshot.val();
-          // Aquí puedes hacer algo con los datos del usuario, por ejemplo, mostrarlos en la consola
-          console.log(userData);
+          if (userData.Nombre==nombre && userData.Apellidos==apellido){
+            
+            alert(userData);
+          }
         });
       })
       .catch((error) => {
         console.error("Error al realizar la consulta:", error);
       });
 
-    // Realizar la consulta y manejar los resultados
-    get(queryRef2)
-      .then((snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-          const userData = childSnapshot.val();
-          // Aquí puedes hacer algo con los datos del usuario, por ejemplo, mostrarlos en la consola
-          alert(userData);
-        });
-      })
-      .catch((error) => {
-        console.error("Error al realizar la consulta:", error);
-      });
+    
   } else {
     console.error("Uno o más elementos del formulario no existen");
   }
