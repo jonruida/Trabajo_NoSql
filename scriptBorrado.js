@@ -39,32 +39,28 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
     const apellido = apellidoElement.value;
 
     // Realizar la consulta a la base de datos
-    const queryRef = query(usersRef, orderByChild("nombre"), equalTo(nombre)); // Ordenar por el campo 'nombre' y filtrar por nombre igual al proporcionado
+const queryRef = query(usersRef, orderByChild("nombre"), equalTo(nombre)); // Ordenar por el campo 'nombre' y filtrar por nombre igual al proporcionado
 
-    // Realizar la consulta y manejar los resultados
-    get(queryRef)
-      .then((snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-          const userData = childSnapshot.val();
-          // Aquí puedes hacer algo con los datos del usuario, por ejemplo, mostrarlos en la consola
-          console.log(userData);
-
-          // Eliminar el usuario de la base de datos
-          const userId = childSnapshot.key; // Obtener el ID del usuario
-          remove(ref(db, `Usuarios/${userId}`))
-            .then(() => {
-              console.log("Usuario eliminado correctamente");
-            })
-            .catch((error) => {
-              console.error("Error al eliminar el usuario:", error);
-            });
-        });
-      })
-      .catch((error) => {
-        console.error("Error al realizar la consulta:", error);
-      });
-  } else {
-    console.error("Uno o más elementos del formulario no existen");
-  }
-});
-
+// Realizar la consulta y manejar los resultados
+get(queryRef)
+  .then((snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+      const userData = childSnapshot.val();
+      // Verificar si el apellido también coincide
+      if (userData.apellido === apellido) {
+        console.log(userData);
+        // Eliminar el usuario de la base de datos
+        const userId = childSnapshot.key; // Obtener el ID del usuario
+        remove(ref(db, `Usuarios/${userId}`))
+          .then(() => {
+            console.log("Usuario eliminado correctamente");
+          })
+          .catch((error) => {
+            console.error("Error al eliminar el usuario:", error);
+          });
+      }
+    });
+  })
+  .catch((error) => {
+    console.error("Error al realizar la consulta:", error);
+  });
