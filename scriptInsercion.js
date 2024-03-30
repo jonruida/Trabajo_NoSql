@@ -52,7 +52,7 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
       nombre: Nombre,
       apellido: Apellidos,
       genero: Genero,
-      fechaNacimiento: Fecha Nacimiento
+      fechaNacimiento: FechaNacimiento
     };
 
     // Agregar el nuevo usuario a la base de datos
