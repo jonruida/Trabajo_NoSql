@@ -49,10 +49,10 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
 
     // Crear un nuevo objeto con los datos del usuario
     const nuevoUsuario = {
-      nombre: nombre,
-      apellido: apellido,
-      genero: genero,
-      fechaNacimiento: fechaNacimiento
+      nombre: Nombre,
+      apellido: Apellidos,
+      genero: Genero,
+      fechaNacimiento: Fecha Nacimiento
     };
 
     // Agregar el nuevo usuario a la base de datos
