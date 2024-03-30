@@ -61,7 +61,7 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
         snapshot.forEach((childSnapshot) => {
           const userData = childSnapshot.val();
           // Aquí puedes hacer algo con los datos del usuario, por ejemplo, mostrarlos en la consola
-          console.log(userData);
+          alert(userData);
         });
       })
       .catch((error) => {
