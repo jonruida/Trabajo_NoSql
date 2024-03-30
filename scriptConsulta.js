@@ -28,7 +28,7 @@ const analytics = getAnalytics(app);
 const db = getDatabase();
 
 // Referencia a la base de datos de usuarios
-const usersRef = ref(db, 'Usuarios');
+const usersRef = ref(db, 'Usuarios/Usuario 1');
 
 // Agregar un evento "submit" al formulario
 document.getElementById("userForm").addEventListener("submit", (event) => {
