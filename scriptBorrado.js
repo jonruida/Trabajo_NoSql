@@ -31,7 +31,7 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
 
   // Obtener los valores del formulario
   const nombreElement = document.getElementById("nombre");
-  const apellidoElement = document.getElementById("apellido");
+  const apellidoElement = document.getElementById("apellidos");
 
   // Verificar si los elementos existen
   if (nombreElement && apellidoElement) {
@@ -39,7 +39,7 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
     const apellido = apellidoElement.value;
 
     // Realizar la consulta a la base de datos
-const queryRef = query(usersRef, orderByChild("nombre"), equalTo(nombre)); // Ordenar por el campo 'nombre' y filtrar por nombre igual al proporcionado
+const queryRef = query(usersRef, orderByChild("Nombre"), equalTo(nombre)); // Ordenar por el campo 'nombre' y filtrar por nombre igual al proporcionado
 
 // Realizar la consulta y manejar los resultados
 get(queryRef)
@@ -47,7 +47,7 @@ get(queryRef)
     snapshot.forEach((childSnapshot) => {
       const userData = childSnapshot.val();
       // Verificar si el apellido también coincide
-      if (userData.apellido === apellido) {
+      if (userData.Apellidos == apellido) {
         console.log(userData);
         // Eliminar el usuario de la base de datos
         const userId = childSnapshot.key; // Obtener el ID del usuario
