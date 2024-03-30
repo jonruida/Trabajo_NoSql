@@ -64,3 +64,4 @@ get(queryRef)
   .catch((error) => {
     console.error("Error al realizar la consulta:", error);
   });
+});    
