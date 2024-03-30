@@ -3,7 +3,7 @@ console.log("El archivo script.js se ha cargado correctamente.");
 // Importar las funciones necesarias del SDK de Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js';
-import { getDatabase, ref, push, orderByChild, get } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
+import { getDatabase, ref, push, orderByChild } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
 
 
   // TODO: Add SDKs for Firebase products that you want to use
@@ -44,7 +44,7 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
     const apellido = apellidoElement.value;
 
     // Realizar la consulta a la base de datos
-    const queryRef = usersRef.orderByChild("nombre"); // Ordenar por el campo 'nombre'
+    const queryRef = orderByChild(usersRef,"nombre"); // Ordenar por el campo 'nombre'
     const query = queryRef.equalTo(nombre); // Filtrar por nombre igual al nombre proporcionado
 
     // Realizar la consulta y manejar los resultados
