@@ -47,7 +47,27 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
     const genero = generoElement.value;
     const fechaNacimiento = fechaNacimientoElement.value;
 
-    // Resto del código para agregar el usuario a la base de datos
+    // Crear un nuevo objeto con los datos del usuario
+    const nuevoUsuario = {
+      nombre: nombre,
+      apellido: apellido,
+      genero: genero,
+      fechaNacimiento: fechaNacimiento
+    };
+
+    // Agregar el nuevo usuario a la base de datos
+    push(usersRef, nuevoUsuario)
+      .then(() => {
+        console.log("Usuario agregado correctamente");
+        // Limpiar el formulario después de agregar el usuario
+        nombreElement.value = "";
+        apellidoElement.value = "";
+        generoElement.value = "";
+        fechaNacimientoElement.value = "";
+      })
+      .catch((error) => {
+        console.error("Error al agregar el usuario:", error);
+      });
   } else {
     console.error("Uno o más elementos del formulario no existen");
   }
