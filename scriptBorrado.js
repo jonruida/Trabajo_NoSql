@@ -30,8 +30,8 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
   event.preventDefault(); // Prevenir que el formulario se envíe
 
   // Obtener los valores del formulario
-  const nombreElement = document.getElementById("Nombre");
-  const apellidoElement = document.getElementById("Apellidos");
+  const nombreElement = document.getElementById("nombre");
+  const apellidoElement = document.getElementById("apellido");
 
   // Verificar si los elementos existen
   if (nombreElement && apellidoElement) {
