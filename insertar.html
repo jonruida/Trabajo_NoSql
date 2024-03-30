@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Realtime Database Demo</title>
+    <link rel="stylesheet" href="style.css">
+	<script type="module" src="script.js"></script>
+</head>
+<body>
+    <h1>Firebase Realtime Database Demo</h1>
+    
+    <form id="userForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" required>
+        <br>
+        <label for="genero">Género:</label>
+        <select id="genero" name="genero" required>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+        <br>
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+        <br>
+        <button type="submit">Agregar Usuario</button><br>
+		<a href="index.html">Menu principal</a>
+    </form>
+
+    <div id="userList"></div>
+
+<!-- Importa tu script.js -->
+
+
+</body>
+</html>
