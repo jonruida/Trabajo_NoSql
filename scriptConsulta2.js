@@ -49,7 +49,7 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
           const userData = childSnapshot.val();
           if (userData.Nombre==nombre && userData.Apellidos==apellido){
             
-            alert(userData);
+            alert(userData.Nombre, userData.Apellidos,userData.Genero);
           }
         });
       })
