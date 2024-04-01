@@ -49,7 +49,8 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
           const userData = childSnapshot.val();
           if (userData.Nombre==nombre && userData.Apellidos==apellido){
             
-            alert("Nombre: "+userData.Nombre+"   Apellidos: "+userData.Apellidos+"  Genero: "+userData.Genero+"     Fecha de Nacimiento: "+userData.FechaNacimiento);
+            alert("Referencia única del usuario: " + userId + "\nNombre: " + userData.Nombre + "   Apellidos: " + userData.Apellidos + "  Género: " + userData.Genero + "     Fecha de Nacimiento: " + userData.FechaNacimiento);
+
           }
         });
       })
