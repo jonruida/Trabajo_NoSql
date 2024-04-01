@@ -18,46 +18,36 @@ const firebaseConfig = {
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = getDatabase();
-
-// Referencia a la base de datos de usuarios
-const usersRef = ref(db, 'Usuarios');
+const db = getDatabase(); // Obtener una referencia a la base de datos
 
 // Agregar un evento "submit" al formulario
-document.getElementById("userForm").addEventListener("submit", (event) => {
+document.getElementById("userForm").addEventListener("submit", async (event) => {
   event.preventDefault(); // Prevenir que el formulario se envíe
 
-  // Obtener los valores del formulario
-  const userId = document.getElementById("userId").value; // Obtener el userID del formulario
+  // Obtener el valor del campo de userID
+  const userId = document.getElementById("userId").value;
 
-  // Verificar si el elemento existe
+  // Verificar si el campo de userID no está vacío
   if (userId) {
-    // Realizar la consulta a la base de datos
-    const queryRef = ref(usersRef);
+    try {
+      // Realizar la consulta a la base de datos
+      const queryRef = ref(db, `Usuarios/${userId}`);
+      const snapshot = await get(queryRef);
 
-    // Realizar la consulta y manejar los resultados
-    get(queryRef)
-      .then((snapshot) => {
-        if (childSnapshot.key == userId ) {
-          const userData = snapshot.val();
-          // Aquí puedes hacer algo con los datos del usuario, por ejemplo, mostrarlos en la consola
-          console.log(userData);
+      // Verificar si el usuario existe
+      if (snapshot.exists()) {
+        const userData = snapshot.val();
+        console.log(userData); // Mostrar los datos del usuario en la consola
 
-          // Eliminar el usuario de la base de datos
-          remove(ref(db, `Usuarios/${userId}`))
-            .then(() => {
-              console.log("Usuario eliminado correctamente");
-            })
-            .catch((error) => {
-              console.error("Error al eliminar el usuario:", error);
-            });
-        } else {
-          console.error("El usuario con el userID proporcionado no existe");
-        }
-      })
-      .catch((error) => {
-        console.error("Error al realizar la consulta:", error);
-      });
+        // Eliminar el usuario de la base de datos
+        await remove(queryRef);
+        console.log("Usuario eliminado correctamente");
+      } else {
+        console.error("El usuario con el userID proporcionado no existe");
+      }
+    } catch (error) {
+      console.error("Error al realizar la consulta o al eliminar el usuario:", error);
+    }
   } else {
     console.error("El campo de userID está vacío");
   }
