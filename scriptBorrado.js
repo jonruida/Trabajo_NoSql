@@ -33,12 +33,12 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
   // Verificar si el elemento existe
   if (userId) {
     // Realizar la consulta a la base de datos
-    const queryRef = ref(usersRef, userId);
+    const queryRef = ref(usersRef);
 
     // Realizar la consulta y manejar los resultados
     get(queryRef)
       .then((snapshot) => {
-        if (snapshot.exists()) {
+        if (childSnapshot.key == userId ) {
           const userData = snapshot.val();
           // Aquí puedes hacer algo con los datos del usuario, por ejemplo, mostrarlos en la consola
           console.log(userData);
