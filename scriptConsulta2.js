@@ -47,6 +47,7 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
       .then((snapshot) => {
         snapshot.forEach((childSnapshot) => {
           const userData = childSnapshot.val();
+          const userId =  childSnapshot.key;
           if (userData.Nombre==nombre && userData.Apellidos==apellido){
             
             alert("Referencia única del usuario: " + userId + "\nNombre: " + userData.Nombre + "   Apellidos: " + userData.Apellidos + "  Género: " + userData.Genero + "     Fecha de Nacimiento: " + userData.FechaNacimiento);
