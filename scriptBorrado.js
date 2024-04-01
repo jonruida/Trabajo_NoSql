@@ -1,3 +1,5 @@
+console.log("El archivo script.js se ha cargado correctamente.");
+
 // Importar las funciones necesarias del SDK de Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js';
@@ -18,37 +20,50 @@ const firebaseConfig = {
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = getDatabase(); // Obtener una referencia a la base de datos
+const db = getDatabase();
+
+// Referencia a la base de datos de usuarios
+const usersRef = ref(db, 'Usuarios');
 
 // Agregar un evento "submit" al formulario
-document.getElementById("userForm").addEventListener("submit", async (event) => {
+document.getElementById("userForm").addEventListener("submit", (event) => {
   event.preventDefault(); // Prevenir que el formulario se envíe
 
-  // Obtener el valor del campo de userID
-  const userId = document.getElementById("userId").value;
+  // Obtener los valores del formulario
+  const nombreElement = document.getElementById("nombre");
+  const apellidoElement = document.getElementById("apellidos");
 
-  // Verificar si el campo de userID no está vacío
-  if (userId) {
-    try {
-      // Realizar la consulta a la base de datos
-      const queryRef = ref(db, `Usuarios/${userId}`);
-      const snapshot = await get(queryRef);
+  // Verificar si los elementos existen
+  if (nombreElement && apellidoElement) {
+    const nombre = nombreElement.value;
+    const apellido = apellidoElement.value;
 
-      // Verificar si el usuario existe
-      if (snapshot.exists()) {
-        const userData = snapshot.val();
-        console.log(userData); // Mostrar los datos del usuario en la consola
+    // Realizar la consulta a la base de datos
+    const queryRef = query(usersRef, orderByChild("nombre"), equalTo(nombre)); // Ordenar por el campo 'nombre' y filtrar por nombre igual al proporcionado
 
-        // Eliminar el usuario de la base de datos
-        await remove(queryRef);
-        console.log("Usuario eliminado correctamente");
-      } else {
-        console.error("El usuario con el userID proporcionado no existe");
-      }
-    } catch (error) {
-      console.error("Error al realizar la consulta o al eliminar el usuario:", error);
-    }
+    // Realizar la consulta y manejar los resultados
+    get(queryRef)
+      .then((snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          const userData = childSnapshot.val();
+          // Aquí puedes hacer algo con los datos del usuario, por ejemplo, mostrarlos en la consola
+          console.log(userData);
+
+          // Eliminar el usuario de la base de datos
+          const userId = childSnapshot.key; // Obtener el ID del usuario
+          remove(ref(db, `Usuarios/${userId}`))
+            .then(() => {
+              console.log("Usuario eliminado correctamente");
+            })
+            .catch((error) => {
+              console.error("Error al eliminar el usuario:", error);
+            });
+        });
+      })
+      .catch((error) => {
+        console.error("Error al realizar la consulta:", error);
+      });
   } else {
-    console.error("El campo de userID está vacío");
+    console.error("Uno o más elementos del formulario no existen");
   }
 });
