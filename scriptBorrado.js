@@ -39,8 +39,8 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
     const apellido = apellidoElement.value;
 
     // Realizar la consulta a la base de datos
-    const queryRef = query(usersRef, orderByChild("Nombre"), equalTo(nombre)); // Ordenar por el campo 'nombre' y filtrar por nombre igual al proporcionado
-
+    //const queryRef = query(usersRef, orderByChild("Nombre"), equalTo(nombre)); // Ordenar por el campo 'nombre' y filtrar por nombre igual al proporcionado
+    const queryRef = query(usersRef);
     // Realizar la consulta y manejar los resultados
     get(queryRef)
       .then((snapshot) => {
@@ -51,13 +51,17 @@ document.getElementById("userForm").addEventListener("submit", (event) => {
 
           // Eliminar el usuario de la base de datos
           const userId = childSnapshot.key; // Obtener el ID del usuario
-          remove(ref(db, `Usuarios/${userId}`))
-            .then(() => {
-              console.log("Usuario eliminado correctamente");
-            })
-            .catch((error) => {
-              console.error("Error al eliminar el usuario:", error);
-            });
+          if(userData.Nombre==nombre && userData.Apellidos==apellido){
+            
+            remove(ref(db, `Usuarios/${userId}`))
+          }
+          // remove(ref(db, `Usuarios/${userId}`))
+          //   .then(() => {
+          //     console.log("Usuario eliminado correctamente");
+          //   })
+          //   .catch((error) => {
+          //     console.error("Error al eliminar el usuario:", error);
+          //   });
         });
       })
       .catch((error) => {
